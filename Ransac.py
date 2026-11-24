@@ -28,16 +28,16 @@ def identify_inliers(residuals, threshold):
     return inlier_mask, num_inliers
 
 # 4. Number of RANSAC Iterations
-def calculate_iterations(p, e, s):
+def calculate_iterations(p, a, s):
     if not 0 < p < 1:
         raise ValueError("p must be between 0 and 1")
-    if not 0 <= e < 1:
-        raise ValueError("e must be between 0 and 1")
+    if not 0 <= a < 1:
+        raise ValueError("a must be between 0 and 1")
     if s < 1:
         raise ValueError("s must be at least 1")
-    if e == 0:
+    if a == 0:
         return 1
-    probability = (1 - e) ** s
+    probability = (1 - a) ** s
     N = np.log(1 - p) / np.log(1 - probability)
     return int(np.ceil(N))
 
